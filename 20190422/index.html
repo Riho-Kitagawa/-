@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <title>Filterable List</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="center-align">
+        My Contacts
+      </h1>
+      <h5 class="center-align">
+        連絡先
+      </h5>
+      <input type="text" id="filterInput" placeholder="名前を探す" />
+
+      <ul id="names" class="collection with-header">
+        <li class="collection-header">
+          <h5>あ</h5>
+        </li>
+        <li class="collection-item">
+          <a href="#">荒井</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">浅川</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">秋田</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">安倍</a>
+        </li>
+
+        <li class="collection-header">
+          <h5>い</h5>
+        </li>
+        <li class="collection-item">
+          <a href="#">井上</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">井ノ内</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">碇</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">石川</a>
+        </li>
+
+        <li class="collection-header">
+          <h5>う</h5>
+        </li>
+        <li class="collection-item">
+          <a href="#">宇梶</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">宇都宮</a>
+        </li>
+        <li class="collection-item">
+          <a href="#">宇川</a>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      // Get input element　input要素を取得
+      let filterInput = document.getElementById("filterInput");
+      //   Add event listener　イベント：ボタンを離したときにfilterNameを行う
+      filterInput.addEventListener("keyup", filterNames);
+
+      function filterNames() {
+        //   Get value of input　inputの値を取得すし大文字にする
+        let filterValue = document
+          .getElementById("filterInput")
+          .value.toUpperCase();
+        //   Get names ul　ulの要素を取得
+        let ul = document.getElementById("names");
+        // Get lis from ul　ulからli.collection-itemの要素をすべて取得
+        let li = ul.querySelectorAll("li.collection-item");
+        // Loop through collection-item lis liの長さまで下の処理を行う
+        for (let i = 0; i < li.length; i++) {
+          let a = li[i].getElementsByTagName("a")[0]; //タグの名前がaである要素をliの長さまで取得
+          //   If matched　マッチしたらfilterValueで検索する
+          if (a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
+            li[i].style.display = ""; //マッチしたら
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
